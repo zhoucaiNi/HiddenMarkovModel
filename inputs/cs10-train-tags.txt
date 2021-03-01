@@ -1,0 +1,10 @@
+pro v 
+np v det n 
+mod pro v det n 
+det n vd det n
+det n v det n
+pro vd pro v det n
+np vd det n
+det n vd pro
+det n v det n
+pro mod v pro
