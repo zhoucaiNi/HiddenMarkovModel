@@ -1,8 +1,11 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Some methods that may be helpful for testing part-of-speech tagging via HMM for CS 10 PS-5
@@ -99,6 +102,20 @@ public class POSLib {
         }
     }
 
+    public static void writeToFile(List<String[]> toFile, String fileName) throws Exception{
+        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+
+        for(String[] items: toFile){
+            for(String item: items){
+                bw.write(item.toLowerCase(Locale.ROOT));
+                bw.write(" ");
+            }
+            bw.write("\n");
+        }
+
+        bw.close();
+    }
+
     public static void main(String[] args) throws Exception {
         ArrayList<String[]> sentences = new ArrayList<>();
         ArrayList<String[]> tags = new ArrayList<>();
@@ -106,5 +123,7 @@ public class POSLib {
         for (int i=0; i<sentences.size(); i++) {
             System.out.println(Arrays.toString(sentences.get(i)) + " => " + Arrays.toString(tags.get(i)));
         }
+        writeToFile(sentences, "inputs/cs10-train-sentences.txt");
+        writeToFile(tags, "inputs/cs10-train-tags.txt");
     }
 }
